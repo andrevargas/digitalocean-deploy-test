@@ -9,13 +9,14 @@ jobs:
     steps:
       - doctl/install
       - doctl/initialize
+      - add_ssh_keys:
+          fingerprints:
+            - "68:ef:da:28:80:25:4f:ac:86:d2:5d:7d:c0:ac:52:94"
       - run:
           name: Create id_rsa file with private ssh key
           command: |
-            mkdir ~/.ssh
+            mkdir -p ~/.ssh
             ssh-keyscan -H $(doctl compute droplet get $DIGITALOCEAN_DROPLET_ID --format PublicIPv4 --no-header) >> ~/.ssh/known_hosts
-            echo $ID_RSA | base64 -d > ~/.ssh/id_rsa
-            chmod 400 ~/.ssh/id_rsa
       - run:
           name: SSH into droplet and execute deploy script
           command: doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh'
