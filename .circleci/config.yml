@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Create id_rsa file with private ssh key
           command: |
-            ssh-keyscan -H $(doctl compute droplet get $DIGITALOCEAN_DROPLET_ID --format PublicIPv4 --no-header) >> ~/.ssh/known_hosts
+            ssh-keyscan -H $(doctl compute droplet get $DIGITALOCEAN_DROPLET_ID --format PublicIPv4 --no-header) > ~/.ssh/known_hosts
             echo $ID_RSA | base64 -d > ~/.ssh/id_rsa
             chmod 400 ~/.ssh/id_rsa
       - run:
