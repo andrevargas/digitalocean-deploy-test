@@ -1,57 +1,22 @@
 version: 2.1
+
+orbs:
+  doctl: digitalocean/cli@1.0.0
+
 jobs:
-  Hello-World:
+  test_if_it_works:
     docker:
-      - image: alpine:3.7
+      - image: alpine
     steps:
       - run:
-          name: Hello World
+          name: Testing doctl...
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-  I-Have-Code:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - checkout
-      - run:
-          name: Code Has Arrived
-          command: |
-            ls -al
-            echo '^^^That should look familiar^^^'
-  Run-With-Node:
-    docker:
-      - image: circleci/node:10-browsers
-    steps:
-      - run:
-          name: Running In A Container With Node
-          command: |
-            node -v
-  Now-Complete:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Approval Complete
-          command: |
-            echo 'Do work once the approval has completed'
+            doctl account get
 
 workflows:
- version: 2
- Example_Workflow:
-   jobs:
-     - Hello-World
-     - I-Have-Code:
-         requires:
-           - Hello-World
-     - Run-With-Node:
-         requires:
-           - Hello-World
-     - Hold-For-Approval:
-         type: approval
-         requires:
-           - Run-With-Node
-           - I-Have-Code
-     - Now-Complete:
-         requires:
-           - Hold-For-Approval
+  test_workflow:
+    jobs:
+      - doctl/install_and_initialize_cli:
+          context: digitalocean-delpoy-test
+          executor: doctl/default
+      - test_if_it_works
