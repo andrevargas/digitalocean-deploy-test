@@ -5,8 +5,7 @@ orbs:
 
 jobs:
   test_if_it_works:
-    docker:
-      - image: alpine
+    executor: doctl/default
     steps:
       - run:
           name: Testing doctl...
