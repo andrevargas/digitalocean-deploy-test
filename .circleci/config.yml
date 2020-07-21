@@ -5,8 +5,9 @@ orbs:
 
 jobs:
   test_if_it_works:
-    executor: doctl/digitalocean
+    executor: doctl/default
     steps:
+      - doctl/install_and_initialize_cli
       - run:
           name: Testing doctl...
           command: |
@@ -15,9 +16,5 @@ jobs:
 workflows:
   test_workflow:
     jobs:
-      - doctl/install_and_initialize_cli:
-          context: digitalocean-deploy-test
-          executor: doctl/default
       - test_if_it_works:
-          requires:
-            - doctl/install_and_initialize_cli
+          context: digitalocean-deploy-test
