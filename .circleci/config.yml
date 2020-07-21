@@ -10,9 +10,9 @@ jobs:
       - doctl/install
       - doctl/initialize
       - run:
-          name: Testing doctl...
+          name: Get droplet info
           command: |
-            doctl account get
+            doctl compute droplet get $DIGITALOCEAN_DROPLET_ID --output json
 
 workflows:
   test_workflow:
