@@ -9,6 +9,9 @@ jobs:
     steps:
       - doctl/install
       - doctl/initialize
+      - add_ssh_keys:
+          fingerprints:
+            - 38:f6:8d:8f:ab:53:28:a6:d6:66:60:2d:6f:6f:48:5b
       - run:
           name: Get droplet info
           command: |
