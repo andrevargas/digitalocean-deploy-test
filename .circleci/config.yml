@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Get droplet info
           command: |
-            ls -larth /root/.ssh
+            ls -larth /home/circleci
           # command: |
             # doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh' --ssh-user=circleci
 
