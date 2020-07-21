@@ -10,13 +10,11 @@ jobs:
       - doctl/install
       - doctl/initialize
       - run:
-          name: Get droplet info
-          command: |
-            ssh-add -l
-            ls -la
-            ls -larth /home/circleci/.config
-          # command: |
-            # doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh' --ssh-user=circleci
+          name: Create id_rsa file with public ssh key
+          command: echo $ID_RSA | base64 -d > id_rsa && chmod 400 id_rsa
+      - run:
+          name: SSH into droplet and execute deploy script
+          command: doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-user root --ssh-key-path id_rsa --ssh-command='./hello.sh'
 
 workflows:
   test_workflow:
