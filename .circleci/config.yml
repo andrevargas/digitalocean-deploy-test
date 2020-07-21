@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Get droplet info
           command: |
-            doctl compute droplet get $DIGITALOCEAN_DROPLET_ID --output json
+            doctl compute ssh $DIGITALOCEAN_DROPLET_ID -ssh-command './hello.sh'
 
 workflows:
   test_workflow:
