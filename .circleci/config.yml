@@ -17,7 +17,7 @@ workflows:
   test_workflow:
     jobs:
       - doctl/install_and_initialize_cli:
-          context: digitalocean-delpoy-test
+          context: digitalocean-deploy-test
           executor: doctl/default
       - test_if_it_works:
           requires:
