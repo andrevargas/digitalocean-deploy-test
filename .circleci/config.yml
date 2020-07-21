@@ -7,7 +7,8 @@ jobs:
   test_if_it_works:
     executor: doctl/default
     steps:
-      - doctl/install_and_initialize_cli
+      - doctl/install
+      - doctl/initialize
       - run:
           name: Testing doctl...
           command: |
