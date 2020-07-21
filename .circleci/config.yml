@@ -18,7 +18,7 @@ jobs:
             chmod 400 ~/.ssh/id_rsa
       - run:
           name: SSH into droplet and execute deploy script
-          command: doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-user root --ssh-key-path ~/.ssh/id_rsa --ssh-command='./hello.sh'
+          command: doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh'
 
 workflows:
   test_workflow:
