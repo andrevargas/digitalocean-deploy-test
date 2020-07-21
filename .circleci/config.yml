@@ -10,7 +10,7 @@ jobs:
       - doctl/install
       - doctl/initialize
       - run:
-          name: Create id_rsa file with public ssh key
+          name: Create id_rsa file with private ssh key
           command: echo $ID_RSA | base64 -d > id_rsa && chmod 400 id_rsa
       - run:
           name: SSH into droplet and execute deploy script
