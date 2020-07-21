@@ -9,11 +9,13 @@ jobs:
     steps:
       - doctl/install
       - doctl/initialize
+      - add_ssh_keys:
+          fingerprints:
+            - 68:ef:da:28:80:25:4f:ac:86:d2:5d:7d:c0:ac:52:94
       - run:
           name: Get droplet info
-          command: ls -la /home/circleci/.ssh
-          # command: |
-            # doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh' --ssh-user=circleci --ssh-key-path=/.ssh/id_rsa
+          command: |
+            doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh' --ssh-user=circleci --ssh-key-path=/.ssh/id_rsa
 
 workflows:
   test_workflow:
