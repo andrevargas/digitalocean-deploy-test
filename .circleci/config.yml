@@ -9,13 +9,10 @@ jobs:
     steps:
       - doctl/install
       - doctl/initialize
-      - add_ssh_keys:
-          fingerprints:
-            - 9b:84:62:0b:92:85:1c:26:8d:fa:c4:d0:a3:3d:1c:b9
       - run:
           name: Get droplet info
           command: |
-            doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command './hello.sh'
+            doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh'
 
 workflows:
   test_workflow:
