@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Get droplet info
           command: |
-            doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh' --ssh-user=circleci --ssh-key-path=/.ssh/id_rsa
+            doctl compute ssh $DIGITALOCEAN_DROPLET_ID --ssh-command='./hello.sh' --ssh-user=circleci
 
 workflows:
   test_workflow:
